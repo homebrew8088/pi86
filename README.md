@@ -1,5 +1,8 @@
 # pi86
+![alt text](/images/20211112_105224.jpg)
 
+\
+\
 This is the code for my 8088/8086 (Really V20/V30) Raspberry Pi "hat"
 
 https://www.homebrew8088.com/home/raspberry-pi-second-project
