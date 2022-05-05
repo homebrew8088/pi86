@@ -18,22 +18,41 @@ The speed, the processor is only running at about 0.3 MHz the best I could calcu
 Not all 8088/8086 Processors will work. The power is connected to the 3.3v pin on the PI. Most NEC V20/V30's will operate 3V - 7V so this is not problem.   
 
 
-
 I have written a c library that helps with interfacing the 8088 PCB.  I have also begun to develop a GUI window that emulates CGA/VGA graphics 
 
--I tested this with a fresh install of Raspberry PI os and it ran just fine.
+**I tested this with a fresh install of Raspberry PI os and it ran just fine.**
 
--To compile I had to install the SDL library.
 
-sudo apt-get update	
+Open Terminal
+
+git clone https://github.com/homebrew8088/pi86.git
+
+sudo apt-get update    
 
 sudo apt-get upgrade
 
 sudo apt-get install gcc build-essential libsdl2-dev
 
--To compile the bios file install nasm 
-
 sudo apt-get install nasm
+
+git clone https://github.com/WiringPi/WiringPi.git
+
+cd WiringPi
+
+git pull origin
+
+./build
+
+cd ..
+
+cd pi86
+
+cd v20 (or v30)
+
+sudo chmod +x pi86  (or pi86.)
+
+./pi86
+
 
 *** This is experimental use at your own risk. 
 
