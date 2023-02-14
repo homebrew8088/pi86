@@ -108,7 +108,7 @@ GND
 Text Label 4550 4100 0    50   ~ 0
 3.3V
 Text Label 4600 2900 0    50   ~ 0
-GND
+INTR
 Text Label 5250 5750 0    50   ~ 0
 GND
 Wire Wire Line
@@ -145,14 +145,9 @@ Text Label 2350 1350 0    50   ~ 0
 5+
 Wire Wire Line
 	4100 3900 4100 3500
-Wire Wire Line
-	4100 2900 4850 2900
 Connection ~ 4100 3900
 Wire Wire Line
-	4100 2700 4100 2900
-Wire Wire Line
 	4100 2700 4850 2700
-Connection ~ 4100 2900
 Wire Wire Line
 	3900 2300 4850 2300
 Connection ~ 3900 2300
@@ -231,8 +226,6 @@ Connection ~ 2650 5050
 Wire Wire Line
 	3250 3000 4100 3000
 Connection ~ 4100 3000
-Wire Wire Line
-	4100 3000 4100 2900
 Wire Wire Line
 	1650 4100 1350 4100
 Wire Wire Line
@@ -468,4 +461,12 @@ Wire Wire Line
 Connection ~ 6850 4800
 Wire Wire Line
 	6850 4800 6950 4800
+Wire Wire Line
+	4850 3100 4300 3100
+Wire Wire Line
+	4100 2700 4100 3000
+Wire Wire Line
+	4850 2900 4300 2900
+Text Label 4650 3100 0    50   ~ 0
+INTA
 $EndSCHEMATC

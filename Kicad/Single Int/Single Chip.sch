@@ -19,7 +19,7 @@ U 1 1 5EF37BD7
 P 5550 3600
 F 0 "U1" H 5550 5581 50  0000 C CNN
 F 1 "8088_Min_Mode" H 5550 5490 50  0000 C CNN
-F 2 "Package_DIP:DIP-40_W15.24mm" H 5600 3700 50  0001 C CIN
+F 2 "Package_DIP:DIP-40_W15.24mm_LongPads" H 5600 3700 50  0001 C CIN
 F 3 "http://datasheets.chipdb.org/Intel/x86/808x/datashts/8088/231456-006.pdf" H 5550 3650 50  0001 C CNN
 	1    5550 3600
 	1    0    0    -1  
@@ -469,4 +469,6 @@ Wire Wire Line
 	4850 2900 4300 2900
 Text Label 4650 3100 0    50   ~ 0
 INTA
+Text Notes 625  4375 0    500  ~ 100
+This does not match PCB
 $EndSCHEMATC
