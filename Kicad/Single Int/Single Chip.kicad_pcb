@@ -464,7 +464,7 @@
   (gr_text "FAN" (at 124.714 88.646) (layer "F.SilkS") (tstamp 00000000-0000-0000-0000-000060c408f3)
     (effects (font (size 0.762 0.762) (thickness 0.15)) (justify left))
   )
-  (gr_text "APR 23" (at 169.672 100.584) (layer "F.SilkS") (tstamp 00000000-0000-0000-0000-000060c4e513)
+  (gr_text "MAR 23" (at 169.672 100.584) (layer "F.SilkS") (tstamp 00000000-0000-0000-0000-000060c4e513)
     (effects (font (size 0.762 0.762) (thickness 0.15)) (justify left))
   )
   (gr_text "EMM COMPUTERS\nV20/V30 (8088/8086) 3.3V \nCopyright (C) 2023 EMM\nwww.homebrew8088.com" (at 139.7 88.392) (layer "F.SilkS") (tstamp 2afe8136-e62c-40f7-9d28-5992f68fe4ee)
