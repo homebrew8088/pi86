@@ -476,7 +476,6 @@
 
   (segment (start 128.27 96.266) (end 127 97.536) (width 0.25) (layer "F.Cu") (net 1) (tstamp 327f5426-443e-4f0b-a530-2a6fd07c41f5))
   (segment (start 128.27 90.17) (end 128.27 96.266) (width 0.25) (layer "F.Cu") (net 1) (tstamp 59f69ea9-a287-484e-b30e-d03e20df3ad6))
-  (segment (start 128.778 89.662) (end 128.27 90.17) (width 0.25) (layer "F.Cu") (net 1) (tstamp 84de5859-02cc-46f0-97ed-ef82bdc42f52))
   (segment (start 147.32 76.073) (end 147.32 65.024) (width 0.25) (layer "F.Cu") (net 2) (tstamp 32d8395f-7608-4497-a54b-49d29a9e4409))
   (segment (start 172.72 80.264) (end 172.72 94.996) (width 0.25) (layer "F.Cu") (net 2) (tstamp edee3fbc-3410-42b7-8d98-c793e49dedf8))
   (via (at 147.32 76.2) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") (net 2) (tstamp dd611ae8-ca64-413b-b7cf-eea3b661ca51))
@@ -516,8 +515,7 @@
   (segment (start 140.97 96.266) (end 142.24 97.536) (width 0.25) (layer "F.Cu") (net 5) (tstamp 9f521d30-b207-4dd3-acd0-1c0089c2ab6a))
   (segment (start 140.97 86.36) (end 140.97 96.266) (width 0.25) (layer "F.Cu") (net 5) (tstamp a55d9c5e-699b-4c91-8708-956de6444876))
   (segment (start 140.97 73.533) (end 137.16 69.723) (width 0.25) (layer "F.Cu") (net 6) (tstamp 115639e7-6d6a-44d8-9f95-81f601e74c9e))
-  (segment (start 143.51 86.868) (end 143.51 86.36) (width 0.25) (layer "F.Cu") (net 6) (tstamp 18af71d2-7174-42b1-bda6-863f98d3eb20))
-  (segment (start 143.51 96.266) (end 143.51 86.614) (width 0.25) (layer "F.Cu") (net 6) (tstamp 4696da54-2f63-4d3f-93ff-7732a2c4d9bf))
+  (segment (start 143.51 96.266) (end 143.51 86.36) (width 0.25) (layer "F.Cu") (net 6) (tstamp 18af71d2-7174-42b1-bda6-863f98d3eb20))
   (segment (start 144.78 97.536) (end 143.51 96.266) (width 0.25) (layer "F.Cu") (net 6) (tstamp 46e93955-efd9-4436-a614-130765b20b2e))
   (segment (start 143.51 86.36) (end 140.97 83.82) (width 0.25) (layer "F.Cu") (net 6) (tstamp 5d33f5a9-dc33-4bb7-a6b6-3450bd76192a))
   (segment (start 137.16 69.723) (end 137.16 65.024) (width 0.25) (layer "F.Cu") (net 6) (tstamp 94125f23-bab0-4915-91c8-3bfb35903c62))
