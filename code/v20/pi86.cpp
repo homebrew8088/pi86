@@ -151,7 +151,7 @@ void keyboard()
 			if(e.type == SDL_KEYDOWN)
 	 		{
 				
-				Write_IO_Byte(0x0060, e.key.keysym.sym);
+				Write_IO_Byte(0x0060, scan_codes[e.key.keysym.scancode]);
 
 				IRQ1();
 
