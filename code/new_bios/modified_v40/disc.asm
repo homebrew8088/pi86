@@ -58,7 +58,7 @@ MESSAGE_1:
 	LOOP .LOOP
 	RET
 	.MESSAGE:
-	DB 'BIOS 1.1 Devloped by EMM APR 2023', 0X0D, 0X0A
+	DB 'BIOS 2.0 Devloped by EMM APR 2023', 0X0D, 0X0A
 	DB '8086/V30 or 8088/V20 CPU', 0X0D, 0X0A	
 	DB '1MB RAM, 64K IO Ports, VGA Graphics', 0X0D, 0X0A
 	DB 'bios.bin loaded at 0xF800:0x0000', 0X0D, 0X0A

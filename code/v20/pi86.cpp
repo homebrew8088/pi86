@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
 	//this makes it full screen 
 	//SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	//The bios file to load	
-	Load_Bios("bios.bin");
+	Load_Bios("pcxtbios.rom");
 	
 	
 	///////////////////////////////////////////////////////////////////
@@ -154,6 +154,13 @@ void keyboard()
 	 		{
 				//Convert SDL scancode to x86 scancode 
 				Write_IO_Byte(0x0060, scan_codes[e.key.keysym.scancode]);
+				//Trigger IRQ1
+				IRQ1();
+			} 
+			if(e.type == SDL_KEYUP)
+	 		{
+				//Convert SDL scancode to x86 scancode 
+				Write_IO_Byte(0x0060, (scan_codes[e.key.keysym.scancode] + 0x80));
 				//Trigger IRQ1
 				IRQ1();
 			} 

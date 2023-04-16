@@ -448,15 +448,15 @@ segment	code
 
 ifdef	IBM_PC
 ifdef	TURBO_ENABLED
-	str_banner	db	'Turbo PC BIOS v3.2 - 2021-11-14', 0
+	str_banner	db	'Turbo PI86 BIOS v2.0 - 2023-04-16', 0
 else
-	str_banner	db	'Super PC BIOS v3.2 - 2021-11-14', 0
+	str_banner	db	'Super PI86 BIOS v2.0 - 2023-04-16', 0
 endif
 else
 ifdef	TURBO_ENABLED
-	str_banner	db	'TurboV40 BIOS v3.2 - 2021-11-14', 0
+	str_banner	db	'Turbo PI86 BIOS v2.0 - 2023-04-16', 0
 else
-	str_banner	db	'SuperV40 BIOS v3.2 - 2021-12-27', 0
+	str_banner	db	'PI86 BIOS v2.0 - 2023-04-16', 0
 endif
 endif
 str_banner_end:
@@ -2434,7 +2434,7 @@ proc	stuff_keyboard_buffer	near
 endp	stuff_keyboard_buffer
 
 
-str_banner_2	db	CR, LF, 'Upgrades by Ya`akov Miles & Jon Petrosky', 0
+str_banner_2	db	CR, LF, 'This BIOS has many contributers', 0
 str_8088	db	'8088 CPU (', 0
 str_boot_basic	db	'Press SPACE to load ROM from F910', 0
 
