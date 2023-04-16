@@ -146,6 +146,28 @@ void keyboard()
 			//Process Key
 			if(e.type == SDL_KEYDOWN)
 	 		{
+				if(scan_codes[e.key.keysym.scancode] == 0x42)
+				{
+					vmode++;
+					if(vmode == 0x08)
+					{
+						vmode = 0;
+					}
+					Write_IO_Byte(0xF0F8, vmode);
+				}
+				if(scan_codes[e.key.keysym.scancode] == 0x41)
+				{
+					vmode--;
+					if(vmode == 0xFF)
+					{
+						vmode = 0x07;
+					}
+				Write_IO_Byte(0xF0F8, vmode);
+				}
+				if(scan_codes[e.key.keysym.scancode] == 0x44)
+				{
+					Stop_Flag = true; 
+				}
 				//Convert SDL scancode to x86 scancode 
 				Write_IO_Byte(0x0060, scan_codes[e.key.keysym.scancode]);
 				//Trigger IRQ1
@@ -158,28 +180,7 @@ void keyboard()
 				//Trigger IRQ1
 				IRQ1();
 			} 
-			if(scan_codes[e.key.keysym.scancode] == 0x42)
-			{
-				vmode++;
-				if(vmode == 0x08)
-				{
-					vmode = 0;
-				}
-				Write_IO_Byte(0xF0F8, vmode);
-			}
-			if(scan_codes[e.key.keysym.scancode] == 0x41)
-			{
-				vmode--;
-				if(vmode == 0xFF)
-				{
-					vmode = 0x07;
-				}
-				Write_IO_Byte(0xF0F8, vmode);
-			}
-			if(scan_codes[e.key.keysym.scancode] == 0x44)
-			{
-				Stop_Flag = true; 
-			}
+
 		}
 	}
 }
