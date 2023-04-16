@@ -287,6 +287,11 @@ void Start_System_Bus(int Processor)
 			printf("Write MEM %#X, ", Address);
 			printf("Data %#X \n", Read_From_Data_Port_0_7());
 		  }
+		  if(Address == 0x449)
+		  {
+			printf("Write MEM %#X, ", Address);
+			printf("Data %#X \n", Read_From_Data_Port_0_7());
+		  }
 		  CLK(); CLK();
 		  break;
 	       //Read IO
