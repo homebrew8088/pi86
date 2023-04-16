@@ -106,22 +106,19 @@ void Up_Date_Screen(SDL_Window *Window, SDL_Renderer *Renderer)
 			Mode_2_80x25(Renderer, Video_Memory_80x25, Cursor_Position);
 			//SDL_Delay(10); 
 		}
-
-		while(Stop_Flag != true & Read_Memory_Byte(0x00449)  == 0x04 & Read_Memory_Byte(0x00466)  == 0x30)
-		{
-			Read_Memory_Array(0xB8000, Video_Memory_320x200, 0x4000); 
-			Graphics_Mode_320_200_Palette_0(Renderer, Video_Memory_320x200);
-			//SDL_Delay(10); 
-		}
-		
 		while(Stop_Flag != true & Read_Memory_Byte(0x00449)  == 0x04 & Read_Memory_Byte(0x00466)  == 0x20)
 		{
 			Read_Memory_Array(0xB8000, Video_Memory_320x200, 0x4000); 
 			Graphics_Mode_320_200_Palette_1(Renderer, Video_Memory_320x200);
 			//SDL_Delay(10); 
 		}
+		while(Stop_Flag != true & Read_Memory_Byte(0x00449)  == 0x04 & Read_Memory_Byte(0x00466)  == 0x30)
+		{
+			Read_Memory_Array(0xB8000, Video_Memory_320x200, 0x4000); 
+			Graphics_Mode_320_200_Palette_0(Renderer, Video_Memory_320x200);
+			//SDL_Delay(10); 
+		}
 	}
-	
 }
 
 void Insert_Key(char character_code, char scan_code) //Interrupt_9

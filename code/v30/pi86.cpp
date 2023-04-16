@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
 	//this makes it full screen 
 	//SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	//The bios file to load	
-	Load_Bios("bios.bin");
+	Load_Bios("pcxtbios.rom");
 	
 	
 	///////////////////////////////////////////////////////////////////
@@ -106,22 +106,19 @@ void Up_Date_Screen(SDL_Window *Window, SDL_Renderer *Renderer)
 			Mode_2_80x25(Renderer, Video_Memory_80x25, Cursor_Position);
 			//SDL_Delay(10); 
 		}
-
-		while(Stop_Flag != true & Read_Memory_Byte(0x00449)  == 0x04 & Read_Memory_Byte(0x00466)  == 0x00)
-		{
-			Read_Memory_Array(0xB8000, Video_Memory_320x200, 0x4000); 
-			Graphics_Mode_320_200_Palette_0(Renderer, Video_Memory_320x200);
-			//SDL_Delay(10); 
-		}
-		
-		while(Stop_Flag != true & Read_Memory_Byte(0x00449)  == 0x04 & Read_Memory_Byte(0x00466)  == 0x01)
+		while(Stop_Flag != true & Read_Memory_Byte(0x00449)  == 0x04 & Read_Memory_Byte(0x00466)  == 0x20)
 		{
 			Read_Memory_Array(0xB8000, Video_Memory_320x200, 0x4000); 
 			Graphics_Mode_320_200_Palette_1(Renderer, Video_Memory_320x200);
 			//SDL_Delay(10); 
 		}
+		while(Stop_Flag != true & Read_Memory_Byte(0x00449)  == 0x04 & Read_Memory_Byte(0x00466)  == 0x30)
+		{
+			Read_Memory_Array(0xB8000, Video_Memory_320x200, 0x4000); 
+			Graphics_Mode_320_200_Palette_0(Renderer, Video_Memory_320x200);
+			//SDL_Delay(10); 
+		}
 	}
-	
 }
 
 void Insert_Key(char character_code, char scan_code) //Interrupt_9
@@ -137,8 +134,9 @@ void Insert_Key(char character_code, char scan_code) //Interrupt_9
 	Write_Memory_Byte(0x041C, Key_Buffer_Tail);                    	//Write the new keyboard buffer tail pointer 	
 }
 void keyboard()
-{	SDL_Event e;
-
+{	
+	SDL_Event e;
+	char vmode = 2;
 	while(Stop_Flag != true)
 	{
 		if (SDL_PollEvent(&e)) 
@@ -157,6 +155,14 @@ void keyboard()
 				//Trigger IRQ1
 				IRQ1();
 			} 
+			if(e.type == SDL_KEYUP)
+	 		{
+				//Convert SDL scancode to x86 scancode 
+				Write_IO_Byte(0x0060, (scan_codes[e.key.keysym.scancode] + 0x80));
+				//Trigger IRQ1
+				IRQ1();
+			} 
+
 		}
 	}
 }

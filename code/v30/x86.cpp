@@ -282,22 +282,32 @@ void Start_System_Bus(int Processor)
 	       //Write Mem
 	       case 0x05:
 		  RAM[Address] = Read_From_Data_Port_0_7();
+		  /*if(Address == 0x466)
+		  {
+			printf("Write MEM %#X, ", Address);
+			printf("Data %#X \n", Read_From_Data_Port_0_7());
+		  }
+		  if(Address == 0x449)
+		  {
+			printf("Write MEM %#X, ", Address);
+			printf("Data %#X \n", Read_From_Data_Port_0_7());
+		  }*/
 		  CLK(); CLK();
 		  break;
 	       //Read IO
 	       case 0x06:
 		  Data_Bus_Direction_8088_OUT();
 		  Write_To_Data_Port_0_7(IO[Address]);
-		  printf("Read IO %#X, ", Address);
-		  printf("Data %#X \n", IO[Address]);
+		  //printf("Read IO %#X, ", Address);
+		  //printf("Data %#X \n", IO[Address]);
 		  CLK(); CLK();
 		  Data_Bus_Direction_8088_IN();
 		  break;
 	       //Write IO
 	       case 0x07:
 		  IO[Address] = Read_From_Data_Port_0_7();
-		  printf("Write IO %#X, ", Address);
-		  printf("Data %#X \n", Read_From_Data_Port_0_7());
+		  //printf("Write IO %#X, ", Address);
+		  //printf("Data %#X \n", Read_From_Data_Port_0_7());
 		  CLK(); CLK();
 		  break;
 	       //Interrupt
