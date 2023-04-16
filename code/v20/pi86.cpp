@@ -60,7 +60,7 @@ int main(int argc, char* argv[]) {
 	while (Stop_Flag != true)   
 	{
 		usleep(50);                                   		//Give the 8088 time to run
-		if(Read_Memory_Byte(0xF80FF) == 0X00)            		//Check for stop command
+		if(Read_IO_Byte(0xF0FF) == 0X00)            		//Check for stop command
 		{  
 			Stop_Flag = true; 
 			break;                              	//If stop = 0x00 then stop threads

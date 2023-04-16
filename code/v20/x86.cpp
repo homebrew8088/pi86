@@ -564,9 +564,9 @@ void Load_Bios(string Bios_file)
 	char FFFF0[] = {0XEA, 0X00, 0X01, 0X00, 0XF8, 'E', 'M', ' ', '0', '4', '/', '1', '0', '/', '2', '0'};
 	Write_Memory_Array(0xFFFF0, FFFF0, sizeof(FFFF0)); //Jump Code
 	Write_Memory_Array(0xF8000, Rom, sizeof(Rom));     //The Rom file
-	Write_Memory_Byte(0xF80FF, 0xFF);                  //Make sure STOP byte is not zero 0x00 = Stop
-	Write_Memory_Byte(0xF8000, 0xFF);                  //Make sure int13 command port is 0xFF
-	Write_Memory_Byte(0xF80F0, 0x03);                  //Video mode
+	Write_IO_Byte(0xF0FF, 0xFF);                  //Make sure STOP byte is not zero 0x00 = Stop
+	Write_IO_Byte(0xF000, 0xFF);                  //Make sure int13 command port is 0xFF
+	Write_IO_Byte(0xF0F0, 0x03);                  //Video mode
 	
 	 //Video port something...?? makes it work 
 	Write_IO_Byte(0X3DA, 0xFF); 
