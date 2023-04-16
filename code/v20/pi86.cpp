@@ -91,7 +91,7 @@ void Up_Date_Screen(SDL_Window *Window, SDL_Renderer *Renderer)
 	while(Stop_Flag != true)
 	{
 		
-		while(Stop_Flag != true & Read_IO_Byte(0xF0F8) == 0x00 | Stop_Flag != true & Read_IO_Byte(0xF0F8) == 0x01)
+		while(Stop_Flag != true & Read_Memory_Byte(0x00449) == 0x00 | Stop_Flag != true & Read_Memory_Byte(0x00449) == 0x01)
 		{
 			Read_Memory_Array(0xB8000, Video_Memory_40x25, 2000); 
 			Read_Memory_Array(0x00450, Cursor_Position, 2);
@@ -99,7 +99,7 @@ void Up_Date_Screen(SDL_Window *Window, SDL_Renderer *Renderer)
 			//SDL_Delay(10); 
 		}
 		
-		while(Stop_Flag != true & Read_IO_Byte(0xF0F8) == 0x02 | Stop_Flag != true & Read_IO_Byte(0xF0F8) == 0x03)
+		while(Stop_Flag != true & Read_Memory_Byte(0x00449) == 0x02 | Stop_Flag != true & Read_Memory_Byte(0x00449) == 0x03)
 		{
 			Read_Memory_Array(0xB8000, Video_Memory_80x25, 4000); 
 			Read_Memory_Array(0x00450, Cursor_Position, 2);
@@ -107,10 +107,17 @@ void Up_Date_Screen(SDL_Window *Window, SDL_Renderer *Renderer)
 			//SDL_Delay(10); 
 		}
 
-		while(Stop_Flag != true & Read_IO_Byte(0xF0F8) == 0x04 | Stop_Flag != true & Read_IO_Byte(0xF0F8) == 0x05)
+		while(Stop_Flag != true & Read_Memory_Byte(0x00449)  == 0x04 & Read_Memory_Byte(0x00466)  == 0x30)
 		{
 			Read_Memory_Array(0xB8000, Video_Memory_320x200, 0x4000); 
 			Graphics_Mode_320_200_Palette_0(Renderer, Video_Memory_320x200);
+			//SDL_Delay(10); 
+		}
+		
+		while(Stop_Flag != true & Read_Memory_Byte(0x00449)  == 0x04 & Read_Memory_Byte(0x00466)  == 0x20)
+		{
+			Read_Memory_Array(0xB8000, Video_Memory_320x200, 0x4000); 
+			Graphics_Mode_320_200_Palette_1(Renderer, Video_Memory_320x200);
 			//SDL_Delay(10); 
 		}
 	}
@@ -146,28 +153,6 @@ void keyboard()
 			//Process Key
 			if(e.type == SDL_KEYDOWN)
 	 		{
-				if(scan_codes[e.key.keysym.scancode] == 0x42)
-				{
-					vmode++;
-					if(vmode == 0x08)
-					{
-						vmode = 0;
-					}
-					Write_IO_Byte(0xF0F8, vmode);
-				}
-				if(scan_codes[e.key.keysym.scancode] == 0x41)
-				{
-					vmode--;
-					if(vmode == 0xFF)
-					{
-						vmode = 0x07;
-					}
-				Write_IO_Byte(0xF0F8, vmode);
-				}
-				if(scan_codes[e.key.keysym.scancode] == 0x44)
-				{
-					Stop_Flag = true; 
-				}
 				//Convert SDL scancode to x86 scancode 
 				Write_IO_Byte(0x0060, scan_codes[e.key.keysym.scancode]);
 				//Trigger IRQ1
