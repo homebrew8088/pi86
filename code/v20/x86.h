@@ -58,7 +58,8 @@ void Write_Memory_Byte(unsigned long long int Address, char byte_for_8088);
 char Read_Memory_Byte(unsigned long long int Address);		
 void Write_Memory_Word(unsigned long long int Address, unsigned short int word_for_8088);
 //IO
-
+void Write_Memory_Array(unsigned long long int Address, char code_for_8088[], int Length);
+void Read_Memory_Array(unsigned long long int Address, char* char_Array, int Length);
 void Write_IO_Byte(unsigned long long int Address, char byte_for_8088);
 char Read_IO_Byte(unsigned long long int Address);
 void Write_IO_Word(unsigned long long int Address, unsigned short int word_for_8088);

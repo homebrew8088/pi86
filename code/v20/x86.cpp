@@ -499,7 +499,22 @@ void Write_Memory_Word(unsigned long long int Address, unsigned short int word_f
    RAM[Address] = word_for_8088; 
    RAM[Address + 1] = word_for_8088 >> 8; 
 }
-
+void Write_IO_Array(unsigned long long int Address, char code_for_8088[], int Length)
+{  
+    for(int i = 0; i < Length; i++) 
+    {
+         IO[Address] = code_for_8088[i];   
+         Address++;
+    } 
+}
+void Read_IO_Array(unsigned long long int Address, char* char_Array, int Length)
+{
+   for(int i=0; i < Length; ++i)
+   {
+      char_Array[i] = IO[Address];
+      Address++;
+   }
+}
 void Write_IO_Byte(unsigned long long int Address, char byte_for_8088)
 {
    IO[Address] = byte_for_8088; 
