@@ -145,7 +145,7 @@ void Int13()
          MemoryFile.read(drive, sizeof(drive));                    //Read the file into the array
          MemoryFile.close();                                         //Close the file
 
-          Write_IO_Array(Buffer_Address, drive, sizeof(drive));
+          Write_Memory_Array(Buffer_Address, drive, sizeof(drive));
       }
       if(Int13_Command == 0x03)
       {
@@ -160,7 +160,7 @@ void Int13()
          int Buffer_Address = (int13_data[10] << 12) + (int13_data[9] << 4) + (int13_data[8] << 8) + int13_data[7];
          char drive[Number_Of_Sectors * Bytes_Per_Sector];    //Char array to hold the data
          
-          Read_IO_Array(Buffer_Address, drive, sizeof(drive));
+          Read_Memory_Array(Buffer_Address, drive, sizeof(drive));
 
          std::fstream MemoryFile;                                    //This opens the drive img
          if(Drive == 0x00){MemoryFile.open(drive_A);}   //File to open
