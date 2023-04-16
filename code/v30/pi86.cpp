@@ -60,7 +60,7 @@ int main(int argc, char* argv[]) {
 	while (Stop_Flag != true)   
 	{
 		usleep(50);                                   		//Give the 8088 time to run
-		if(Read_Memory_Byte(0xF80FF) == 0X00)            		//Check for stop command
+		if(Read_IO_Byte(0xF0FF) == 0X00)            		//Check for stop command
 		{  
 			Stop_Flag = true; 
 			break;                              	//If stop = 0x00 then stop threads
@@ -143,149 +143,21 @@ void keyboard()
 	{
 		if (SDL_PollEvent(&e)) 
 		{
+			//Ends the program when click X
 			if (e.type == SDL_QUIT) 
 			{
 				Stop_Flag = true;     
 				break;
 			}
+			//Process Key
 			if(e.type == SDL_KEYDOWN)
 	 		{
-				switch (e.key.keysym.mod)
-				{
-				//KMOD_NONE
-				case 0x0000:
-					Insert_Key(character_codes_lowercase[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);
-					break;
-				//KMOD_NUM
-				case 0x1000:
-					Insert_Key(character_codes_lowercase[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);
-					break;
-				//KMOD_LSHIFT
-				case 0x0001:
-					Insert_Key(character_codes_uppercase[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);
-					break;
-				//KMOD_RSHIFT
-				case 0x0002:
-					Insert_Key(character_codes_uppercase[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);
-					break;
-				//KMOD_LSHIFT + KMOD_NUM
-				case 0x1001:
-					Insert_Key(character_codes_uppercase[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);
-					break;
-				//KMOD_RSHIFT + KMOD_NUM
-				case 0x1002:
-					Insert_Key(character_codes_uppercase[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);
-					break;
-				//KMOD_LSHIFT + KMOD_RSHIFT
-				case 0x0003:
-					Insert_Key(character_codes_uppercase[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);
-					break;
-				//KMOD_LSHIFT + KMOD_RSHIFT + KMOD_NUM
-				case 0x1003:
-					Insert_Key(character_codes_uppercase[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);
-					break;
-				//KMOD_CAPS 
-				case 0x2000:
-					Insert_Key(character_codes_uppercase[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);
-					break;
-				//KMOD_CAPS + KMOD_LSHIFT
-				case 0x2001:
-					Insert_Key(character_codes_lowercase[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);
-					break;
-				//KMOD_CAPS + KMOD_RSHIFT
-				case 0x2002:
-					Insert_Key(character_codes_lowercase[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);
-					break;
-				//KMOD_CAPS + KMOD_LSHIFT + KMOD_RSHIFT
-				case 0x2003:
-					Insert_Key(character_codes_lowercase[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);
-					break;
-				//KMOD_CAPS + KMOD_NUM
-				case 0x3000:
-					Insert_Key(character_codes_uppercase[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);
-					break;
-				//KMOD_CAPS + KMOD_LSHIFT + KMOD_NUM
-				case 0x3001:
-					Insert_Key(character_codes_lowercase[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);
-					break;
-				//KMOD_CAPS + KMOD_RSHIFT + KMOD_NUM
-				case 0x3002:
-					Insert_Key(character_codes_lowercase[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);
-					break;
-				//KMOD_CAPS + KMOD_LSHIFT + KMOD_RSHIFT + KMOD_NUM
-				case 0x3003:
-					Insert_Key(character_codes_lowercase[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);
-					break;
-				//KMOD_LCTRL
-				case 0x0040:
-					if(e.key.keysym.scancode == 0x2A)
-					{
-						Reset();
-					}
-					Insert_Key(character_codes_ctrl[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);	
-					break;
-				//KMOD_RCTRL
-				case 0x0080:
-					Insert_Key(character_codes_ctrl[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);	
-					break;
-				//KMOD_LALT
-				case 0x0100:
-					if(e.key.keysym.scancode == 0x2A)
-					{
-						Write_Memory_Byte(0x00449, 0x02);
-					}
-					Insert_Key(character_codes_ctrl[e.key.keysym.scancode], scan_codes[e.key.keysym.scancode]);	
-					break;
-				//KMOD_RALT
-				case 0x0200:
-					break;
-				default:
-					break;
-				}
-
-
+				//Convert SDL scancode to x86 scancode 
 				Write_IO_Byte(0x0060, scan_codes[e.key.keysym.scancode]);
-
+				//Trigger IRQ1
 				IRQ1();
-
 			} 
 		}
 	}
 }
-/*		X86 keyboard flag
- 
-  		|7|6|5|4|3|2|1|0|  40:17  Keyboard Flags Byte 0
-		 | | | | | | | `---- right shift key depressed
-		 | | | | | | `----- left shift key depressed
-		 | | | | | `------ CTRL key depressed
-		 | | | | `------- ALT key depressed
-		 | | | `-------- scroll-lock is active
-		 | | `--------- num-lock is active
-		 | `---------- caps-lock is active
-		 `----------- insert is active
-
-		|7|6|5|4|3|2|1|0|  40:18  Keyboard Flags Byte 1
-		 | | | | | | | `---- left CTRL key depressed
-		 | | | | | | `----- left ALT key depressed
-		 | | | | | `------ system key depressed and held
-		 | | | | `------- suspend key has been toggled
-		 | | | `-------- scroll lock key is depressed
-		 | | `--------- num-lock key is depressed
-		 | `---------- caps-lock key is depressed
-		 `----------- insert key is depressed */
-/*
-    KMOD_NONE = 0x0000,
-    KMOD_LSHIFT = 0x0001,
-    KMOD_RSHIFT = 0x0002,
-    KMOD_LCTRL = 0x0040,
-    KMOD_RCTRL = 0x0080,
-    KMOD_LALT = 0x0100,
-    KMOD_RALT = 0x0200,
-    KMOD_LGUI = 0x0400,
-    KMOD_RGUI = 0x0800,
-    KMOD_NUM = 0x1000,
-    KMOD_CAPS = 0x2000,
-    KMOD_MODE = 0x4000,
-    KMOD_RESERVED = 0x8000
-*/
 

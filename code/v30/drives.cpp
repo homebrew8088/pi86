@@ -20,29 +20,29 @@ void Get_Disk_Parameters_A()
    
    char Media_Descriptor[0x10] = {0x04, 0, 0, 0, 0, 0, 0, 0, 0xF8, 0x02, 0, 0, 0, 0x01, 0, 0};
    //Start at port 11  
-    Write_Memory_Byte(0xF800B, Media_Descriptor[Floppy[0x15] & 0x0F]);    //Media Descriptor - BL
+    Write_IO_Byte(0xF00B, Media_Descriptor[Floppy[0x15] & 0x0F]);    //Media Descriptor - BL
 
-    Write_Memory_Byte(0xF800C, Floppy[0x1A]);                             //Low byte heads per cylinder - DH -1
-    Write_Memory_Byte(0xF800D, Floppy[0x1B]);                             //High byte heads per cylinder
+    Write_IO_Byte(0xF00C, Floppy[0x1A]);                             //Low byte heads per cylinder - DH -1
+    Write_IO_Byte(0xF00D, Floppy[0x1B]);                             //High byte heads per cylinder
             
-    Write_Memory_Byte(0xF800E, Floppy[0x0B]);                             //Low bytes per sector - uS
-    Write_Memory_Byte(0xF800F, Floppy[0x0C]);                             //High bytes per sector
+    Write_IO_Byte(0xF00E, Floppy[0x0B]);                             //Low bytes per sector - uS
+    Write_IO_Byte(0xF00F, Floppy[0x0C]);                             //High bytes per sector
    
    int Head_Per_Cylinder = (Floppy[0x1B] << 8) + Floppy[0x1A];    
    int Sector_Per_Track = (Floppy[0x19] << 8) + Floppy[0x18]; 
    int Number_Of_Sectors = (Floppy[0x14] << 8) + Floppy[0x13]; 
    
    int Number_Of_Cylinders = Number_Of_Sectors / Sector_Per_Track / Head_Per_Cylinder;
-    Write_Memory_Byte(0xF8011, Number_Of_Cylinders);                      //CH
+    Write_IO_Byte(0xF011, Number_Of_Cylinders);                      //CH
    
    Number_Of_Cylinders = (Number_Of_Cylinders >> 2) & 0xC0;
    Sector_Per_Track = Sector_Per_Track & 0X3F;                    //CL
-    Write_Memory_Byte(0xF8010, Number_Of_Cylinders + Sector_Per_Track);
-    Write_Memory_Byte(0xF8012, 0x00);             //Always zero for floppy
-    Write_Memory_Byte(0xF8013, 0x00);             //Always zero for floppy
-    Write_Memory_Byte(0xF8014, 0x00);             //Always zero for floppy
-    Write_Memory_Byte(0xF8015, 0x00);             //Always zero for floppy
-    Write_Memory_Byte(0xF8016, 0X01);             //Drive type
+    Write_IO_Byte(0xF010, Number_Of_Cylinders + Sector_Per_Track);
+    Write_IO_Byte(0xF012, 0x00);             //Always zero for floppy
+    Write_IO_Byte(0xF013, 0x00);             //Always zero for floppy
+    Write_IO_Byte(0xF014, 0x00);             //Always zero for floppy
+    Write_IO_Byte(0xF015, 0x00);             //Always zero for floppy
+    Write_IO_Byte(0xF016, 0X01);             //Drive type
 }
 void Get_Disk_Parameters_C()
 {
@@ -66,53 +66,53 @@ void Get_Disk_Parameters_C()
    
    //char Media_Descriptor[0x10] = {0x04, 0, 0, 0, 0, 0, 0, 0, 0x00, 0x02, 0, 0, 0, 0x01, 0, 0};
    //Start at port 11  
-   //Write_Memory_Byte(0xF800B, Media_Descriptor[drive[0x15] & 0x0F]);    //Media Descriptor - BL
+   //Write_IO_Byte(0xF00B, Media_Descriptor[drive[0x15] & 0x0F]);    //Media Descriptor - BL
 
-    Write_Memory_Byte(0xF800C, drive[0x1A]);                             //Low byte heads per cylinder - DH -1
-    Write_Memory_Byte(0xF800D, drive[0x1B]);                             //High byte heads per cylinder
+    Write_IO_Byte(0xF00C, drive[0x1A]);                             //Low byte heads per cylinder - DH -1
+    Write_IO_Byte(0xF00D, drive[0x1B]);                             //High byte heads per cylinder
             
-    Write_Memory_Byte(0xF800E, drive[0x0B]);                             //Low bytes per sector - uS
-    Write_Memory_Byte(0xF800F, drive[0x0C]);                             //High bytes per sector
+    Write_IO_Byte(0xF00E, drive[0x0B]);                             //Low bytes per sector - uS
+    Write_IO_Byte(0xF00F, drive[0x0C]);                             //High bytes per sector
    
    int Head_Per_Cylinder = (drive[0x1B] << 8) + drive[0x1A];    
    int Sector_Per_Track = (drive[0x19] << 8) + drive[0x18]; 
    int Number_Of_Sectors = (drive[0x14] << 8) + drive[0x13]; 
    
    int Number_Of_Cylinders = Number_Of_Sectors / Sector_Per_Track / Head_Per_Cylinder;
-    Write_Memory_Byte(0xF8011, Number_Of_Cylinders);                      //CH
+    Write_IO_Byte(0xF011, Number_Of_Cylinders);                      //CH
    
    Number_Of_Cylinders = (Number_Of_Cylinders >> 2) & 0xC0;
    Sector_Per_Track = Sector_Per_Track & 0X3F;                    //CL
-    Write_Memory_Byte(0xF8010, Number_Of_Cylinders + Sector_Per_Track);
+    Write_IO_Byte(0xF010, Number_Of_Cylinders + Sector_Per_Track);
    
    int Small_Sectors = (drive[0x14] << 8) + drive[0x13];
    if(Small_Sectors == 0x0000)
    {
-       Write_Memory_Byte(0xF8012, drive[0x20]);   //Big sector
-       Write_Memory_Byte(0xF8013, drive[0x21]);
-       Write_Memory_Byte(0xF8014, drive[0x22]);
-       Write_Memory_Byte(0xF8015, drive[0x23]);
+       Write_IO_Byte(0xF012, drive[0x20]);   //Big sector
+       Write_IO_Byte(0xF013, drive[0x21]);
+       Write_IO_Byte(0xF014, drive[0x22]);
+       Write_IO_Byte(0xF015, drive[0x23]);
    }
    else
    {
-       Write_Memory_Byte(0xF8012, drive[0x13]);   //Small sector
-       Write_Memory_Byte(0xF8013, drive[0x14]);
-       Write_Memory_Byte(0xF8014, 0x00);
-       Write_Memory_Byte(0xF8015, 0x00);
+       Write_IO_Byte(0xF012, drive[0x13]);   //Small sector
+       Write_IO_Byte(0xF013, drive[0x14]);
+       Write_IO_Byte(0xF014, 0x00);
+       Write_IO_Byte(0xF015, 0x00);
    }
-    Write_Memory_Byte(0xF8016, 0X03);
+    Write_IO_Byte(0xF016, 0X03);
 }
 void Int13()
 {
-   char Int13_Command =  Read_Memory_Byte(0xF8000);
-   char Drive =  Read_Memory_Byte(0xF8006);
+   char Int13_Command =  Read_IO_Byte(0xF000);
+   char Drive =  Read_IO_Byte(0xF006);
 
    if(Int13_Command != 0xFF)
    {
       if(Drive == 0x00){Get_Disk_Parameters_A();}   //File to open
       if(Drive == 0x80){Get_Disk_Parameters_C();}
       char int13_data[0X20];
-       Read_Memory_Array(0xF8000, int13_data, 0X20);
+       Read_IO_Array(0xF000, int13_data, 0X20);
       
       if(Int13_Command == 0x00)
       {
@@ -179,7 +179,7 @@ void Int13()
          if(int13_data[6] == 0x00){Get_Disk_Parameters_A();}   
          if(int13_data[6] == 0x80){Get_Disk_Parameters_C();}
       }  
-       Write_Memory_Byte(0xF8000, 0xFF);  
+       Write_IO_Byte(0xF000, 0xFF);  
    }
 
 }	
@@ -189,7 +189,7 @@ void Drives()
 	while (Stop_Flag != true)   
 	{
 		usleep(500);
-		Int13_Command =  Read_Memory_Byte(0xF8000);  	//Check for Int13 command
+		Int13_Command =  Read_IO_Byte(0xF000);  	//Check for Int13 command
 		if(Int13_Command != 0XFF)                       	//Check for Int13         
 		{
 			Int13();                                     	//Raspberry PI Int13 handler

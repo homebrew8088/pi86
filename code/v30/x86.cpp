@@ -499,7 +499,22 @@ void Write_Memory_Word(unsigned long long int Address, unsigned short int word_f
    RAM[Address] = word_for_8088; 
    RAM[Address + 1] = word_for_8088 >> 8; 
 }
-
+void Write_IO_Array(unsigned long long int Address, char code_for_8088[], int Length)
+{  
+    for(int i = 0; i < Length; i++) 
+    {
+         IO[Address] = code_for_8088[i];   
+         Address++;
+    } 
+}
+void Read_IO_Array(unsigned long long int Address, char* char_Array, int Length)
+{
+   for(int i=0; i < Length; ++i)
+   {
+      char_Array[i] = IO[Address];
+      Address++;
+   }
+}
 void Write_IO_Byte(unsigned long long int Address, char byte_for_8088)
 {
    IO[Address] = byte_for_8088; 
@@ -549,9 +564,9 @@ void Load_Bios(string Bios_file)
 	char FFFF0[] = {0XEA, 0X00, 0X01, 0X00, 0XF8, 'E', 'M', ' ', '0', '4', '/', '1', '0', '/', '2', '0'};
 	Write_Memory_Array(0xFFFF0, FFFF0, sizeof(FFFF0)); //Jump Code
 	Write_Memory_Array(0xF8000, Rom, sizeof(Rom));     //The Rom file
-	Write_Memory_Byte(0xF80FF, 0xFF);                  //Make sure STOP byte is not zero 0x00 = Stop
-	Write_Memory_Byte(0xF8000, 0xFF);                  //Make sure int13 command port is 0xFF
-	Write_Memory_Byte(0xF80F0, 0x03);                  //Video mode
+	Write_IO_Byte(0xF0FF, 0xFF);                  //Make sure STOP byte is not zero 0x00 = Stop
+	Write_IO_Byte(0xF000, 0xFF);                  //Make sure int13 command port is 0xFF
+	Write_IO_Byte(0xF0F0, 0x03);                  //Video mode
 	
 	 //Video port something...?? makes it work 
 	Write_IO_Byte(0X3DA, 0xFF); 
