@@ -885,7 +885,7 @@
     (property "Value" "8088_Min_Mode" (at 140.97 43.434 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "Socket:DIP_Socket-40_W11.9_W12.7_W15.24_W17.78_W18.5_3M_240-1280-00-0602J" (at 142.24 88.9 0)
+    (property "Footprint" "Package_DIP:DIP-40_W15.24mm" (at 142.24 88.9 0)
       (effects (font (size 1.27 1.27) italic) hide)
     )
     (property "Datasheet" "http://datasheets.chipdb.org/Intel/x86/808x/datashts/8088/231456-006.pdf" (at 140.97 90.17 0)
