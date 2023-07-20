@@ -81,7 +81,7 @@ void Text_Mode_80x25(SDL_Renderer *Renderer, char* Video_Memory, char* Cursor_Po
 	
 }
 
-void print_pixs_mode4_palette_0(SDL_Renderer *Renderer, int x, int y, unsigned char Ascii_value)
+static void print_pixs_mode4_palette_0(SDL_Renderer *Renderer, int x, int y, unsigned char Ascii_value)
 {
 	for (int i = 0; i < 4; i++)
 	{
@@ -109,7 +109,7 @@ void print_pixs_mode4_palette_0(SDL_Renderer *Renderer, int x, int y, unsigned c
 	}	
 }
 
-void Graphics_Mode_320_200_Palette_0(SDL_Renderer *Renderer, char* Video_Memory)
+static void Graphics_Mode_320_200_Palette_0(SDL_Renderer *Renderer, char* Video_Memory)
 {
 			int index = 0; 				
 			for (int j = 0; j < 100; j++)
