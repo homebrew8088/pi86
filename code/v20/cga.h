@@ -1,7 +1,7 @@
 #ifndef CGA_H
 #define CGA_H
 
-#include "SDL.h"
+#include <SDL.h>
 #include "font.h"
 
 using namespace std;

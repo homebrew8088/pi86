@@ -72,7 +72,7 @@ void Mode_2_80x25(SDL_Renderer *Renderer, char* Video_Memory, char* Cursor_Posit
 }
 
 
-void print_pixs_mode4_palette_0(SDL_Renderer *Renderer, int x, int y, unsigned char Ascii_value)
+static void print_pixs_mode4_palette_0(SDL_Renderer *Renderer, int x, int y, unsigned char Ascii_value)
 {
 	for (int i = 0; i < 4; i++)
 	{
